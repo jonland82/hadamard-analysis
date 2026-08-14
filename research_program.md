@@ -2,9 +2,13 @@
 
 ## Purpose
 
-The project is investigating how a system can be globally choreographed, locally hard to predict, and still locally informative enough to guide an exact search.
+The canonical one-sentence research hypothesis is:
+
+> Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
 
 The work will be developed as a sequence of short notes. Each experiment is paired with a precise mathematical statement, an empirical hypothesis, and an explicit limitation. The strongest compatible sequence can later be consolidated into a final paper.
+
+The completed Note 1 robustness study narrows the intended reading: canonical representatives are locally predictable at moderate context length, but nearly all of that gain disappears after equivalence-preserving row and column permutations and becomes statistically indistinguishable from the balanced-row baseline at the primary comparison. Thus local information is currently established as a representation-dependent empirical signal; generalization beyond the fixed catalog and usefulness for exact search remain open.
 
 ## Narrative-to-experiment map
 
@@ -81,7 +85,7 @@ These are **[DEFINITION DRAFT]** until the shared sampling choices are fixed for
 
 ## Data plan
 
-No experimental corpus is currently present. The first corpus should contain verified Hadamard matrices at small orders for which matrices are actually available. Every matrix must pass an exact integer check:
+The Note 1 experiment code now downloads and caches a small-order McKay corpus locally, verifies each matrix exactly, and records the completed robustness study under [`notes/01_bounded_context_predictability/`](notes/01_bounded_context_predictability/). Raw downloaded data remain untracked; reproducible result tables and metadata are tracked. Every matrix must pass the exact integer check
 
 $$
 H\in\{-1,+1\}^{d\times d},
@@ -146,9 +150,9 @@ $$
 
 The proof is immediate by counting the plus signs remaining after conditioning on the prefix. This shows that global balance alone creates weak local dependence.
 
-### [CONJECTURE] Empirical statement
+### [EMPIRICAL] Result
 
-After accounting for normalization and the balanced-sequence baseline, Hadamard matrices exhibit additional local conditional bias under at least some explicitly specified ensembles and traversals.
+Catalog representatives exhibit substantial same-order held-out local information, but nearly all of the gain disappears after equivalence-preserving row and column permutations. At the primary orders $24$ and $28$, the permuted-equivalent residual is statistically indistinguishable from the balanced-row baseline at $k=8$.
 
 ### Experiment
 
@@ -156,11 +160,11 @@ Estimate $p_k(c)$, $\varepsilon_k^{\max}$, and $\varepsilon_k^{\mathrm{avg}}$, r
 
 ### Limitation
 
-Observed residual bias is family- and sampling-dependent until replicated across orders and equivalence classes.
+The result is conditional on the fixed catalog, row-reset traversal, representative-selection convention, and same-order splits. It is not an equivalence-invariant, held-out-family, held-out-order, or asymptotic claim.
 
-### Proposed note title
+### Workshop manuscript
 
-*Probability, Balance, and Local Bias in Hadamard Rows*
+[*Where the Signal Lives: Bounded-Context Prediction in Hadamard Representatives*](notes/01_bounded_context_predictability/paper/note1.pdf)
 
 ## Note 2 / Experiment B: Predictive log loss
 
@@ -489,16 +493,17 @@ $$
 
 ## Execution order
 
-1. Freeze one explicit probability model and traversal for the pilot study.
-2. Assemble and independently verify the small-order corpus and controls.
-3. Run Experiment A and test whether anything remains after the balance baseline.
-4. If residual signal exists, run the held-out log-loss and information experiments.
-5. Sweep context length and test transpose symmetry.
-6. Implement the exact solver and verify all pruning logic with unit tests.
-7. Benchmark branch ordering under a first-solution stopping rule.
-8. Run the full ablation and select the strongest supported paper arc.
+1. **Complete:** freeze the row-reset probability model and primary held-out metric.
+2. **Complete:** assemble and independently verify the small-order corpus and matched controls.
+3. **Complete:** run the repeated class splits, leakage audits, order sweep, and context sweep for Note 1.
+4. **Complete:** establish that canonical representatives carry held-out local signal but that no practically meaningful residual beyond balance is detected after equivalence-preserving permutation at the primary comparison.
+5. **Complete:** write Note 1 as a representation-dependence result, with the fixed-catalog and small-order limitations explicit.
+6. **Next:** test transpose/traversal dependence separately if needed for the later local-statistics arc.
+7. Implement the exact solver and verify all pruning logic with unit tests.
+8. Benchmark whether the representation-dependent predictor improves branch ordering under a first-solution stopping rule.
+9. Run the full search ablation and select the strongest supported paper arc.
 
-This order contains an intentional decision point: if Experiment A finds no residual Hadamard-specific signal, the project should report that result and avoid building a search heuristic around noise.
+The first decision point is now resolved: the invariant residual is not the signal to build on. Any search heuristic should instead test the strong canonical-coordinate signal under a solver using the same representation convention.
 
 ## Standard structure for each short note
 

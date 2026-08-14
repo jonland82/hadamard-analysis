@@ -2,11 +2,15 @@
 
 This document gives the conceptual theory. The operational plan, data requirements, formal statement--experiment pairings, and proposed short-note sequence are in [`research_program.md`](research_program.md). The original handoff remains available under [`context_initial_deprecated/`](context_initial_deprecated/) as historical reference.
 
-**Current status:** the structural Hadamard facts and exact pruning rules are established, but the local-unpredictability theorem is still a target. No experimental corpus or results are currently included, and the earlier informal "Markov result" has not yet been reconstructed.
+**Current status:** the structural Hadamard facts and exact pruning rules are established, but the local-unpredictability theorem is still a target. Note 1 now contains a verified small-order corpus pipeline and a completed 20-repetition robustness study. Canonical representatives show substantial held-out bounded-context signal, but nearly all of it disappears under equivalence-preserving row and column permutations; at the primary comparison, the remaining gain is statistically indistinguishable from the balanced-row control. The search-guidance claim remains untested, and the earlier informal "Markov result" has not been independently reconstructed.
 
 ## Core narrative
 
-The project begins with a tension:
+The canonical one-sentence research hypothesis is:
+
+> Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
+
+The project begins with the underlying tension:
 
 > A Hadamard matrix is completely rigid when viewed as a whole, yet a small local window may reveal very little about the next entry.
 
@@ -321,7 +325,7 @@ A more modest but still coherent result would be:
 - show that the measured dependence improves branch ordering;
 - clearly separate empirical speedups from proved mathematical facts.
 
-In one sentence: the project is investigating how a system can be globally choreographed, locally hard to predict, and still locally informative enough to guide an exact search.
+The robustness study supports a representation-aware reading of this hypothesis: the global choreography is exact; local prediction is difficult once arbitrary equivalent presentations are admitted; canonical presentations nevertheless contain transferable local information; and whether that information can guide exact search is still open.
 
 ## 10. Current claim registry
 
@@ -348,14 +352,21 @@ In one sentence: the project is investigating how a system can be globally chore
 
 ### [CONJECTURE]
 
-- Some Hadamard ensembles contain residual local information beyond normalization and balance.
+- Some representation-robust Hadamard ensembles contain residual local information beyond normalization and balance.
 - For useful regimes of fixed or slowly growing $k$, that information may be small and may decrease with $d$.
 - A held-out local predictor may reduce first-solution search work through branch ordering.
+
+### [EMPIRICAL]
+
+- Across $20$ paired repetitions, the order-$28$, $k=8$ canonical representatives improve log loss over the fair-coin baseline by $0.13935$ nats, with a 95% repetition-bootstrap interval of $[0.13850,0.14014]$.
+- Equivalence-preserving row and column permutations reduce that gain to $0.03047$ nats, while the balanced-row control gains $0.03033$ nats. Their paired difference is $0.00014$ with interval $[-0.00024,0.00052]$.
+- The canonical-minus-permuted contrast is positive throughout $k=2,\ldots,12$ at orders $24$ and $28$. This indicates that most of the canonical signal is representation-specific rather than an invariant of the Hadamard equivalence class. Full conditions and tables are in [`ROBUSTNESS_RESULTS.md`](notes/01_bounded_context_predictability/ROBUSTNESS_RESULTS.md).
 
 ### [OPEN]
 
 - The exact earlier "Markov result" must be reconstructed from code, data, or notes before it is cited.
-- No experimental claim has yet been established because the matrix corpus has not been assembled.
+- Generalization beyond the fixed catalog must be tested across construction families, representative-selection rules, and held-out orders.
+- It remains unknown whether any held-out signal reduces exact-search work.
 
 ## 11. Open mathematical questions
 

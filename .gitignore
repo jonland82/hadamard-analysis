@@ -1,1 +1,14 @@
 /hadamard_result_codex_context.zip
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.venv/
+/notes/01_bounded_context_predictability/experiments/data/raw/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
