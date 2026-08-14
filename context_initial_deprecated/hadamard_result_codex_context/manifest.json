@@ -1,0 +1,24 @@
+{
+  "project": "Hadamard Result",
+  "generated": "2026-08-14",
+  "purpose": "Initial research context handoff for Codex",
+  "files": [
+    "README.md",
+    "PROJECT_CONTEXT.md",
+    "RESULTS_AND_CONJECTURES.md",
+    "ALGORITHMS.md",
+    "EXPERIMENTS.md",
+    "PAPER_ROADMAP.md",
+    "CODEX_INSTRUCTIONS.md",
+    "RESEARCH_LOG_TEMPLATE.md",
+    "HANDOFF_PROMPT.md"
+  ],
+  "claim_statuses": [
+    "KNOWN",
+    "DERIVED",
+    "EMPIRICAL",
+    "CONJECTURE",
+    "DEFINITION DRAFT",
+    "OPEN"
+  ]
+}
