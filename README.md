@@ -1,5 +1,7 @@
 # Hadamard Analysis
 
+**Project website:** [jonland82.github.io/hadamard-analysis](https://jonland82.github.io/hadamard-analysis/)
+
 This repository studies how exact global organization becomes useful during local construction. A Hadamard matrix may reveal little through the last few printed entries, while the evolving balance and orthogonality state sharply constrains the composition of the region that remains. The project measures that regional information and asks whether it can guide an exact search without compromising completeness.
 
 The one-sentence narrative is:
