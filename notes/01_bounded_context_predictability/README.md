@@ -41,9 +41,9 @@ $$
 
 This note tests the first two clauses of the project's now-revised narrative:
 
-> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
+> Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 
-The first note stops before the regional and search claims. Its PDF intentionally preserves the earlier project wording under which it was written; Note 2 records the evidence that motivated the revision above.
+The first note stops before the regional and search claims. Its revised framing now places this representation diagnosis explicitly at the start of the three-note arc; its mathematics and experiments are unchanged.
 
 ## Planned mathematical statements
 
@@ -86,4 +86,4 @@ The code should remain deterministic, command-line driven, and partitionable by 
 - **[EMPIRICAL]:** across $20$ paired repetitions, bounded contexts predict held-out canonical representatives from the same order, but nearly all of the gain disappears under independent row/column permutations and approaches the balanced-row control.
 - **[EMPIRICAL]:** no practically meaningful equivalence-invariant residual is detected at the primary $k=8$ comparison for orders $24$ and $28$.
 - **[OPEN]:** the earlier remembered in-sample result has not yet been reconstructed and is not treated as evidence.
-- **[OPEN]:** whether the representation-dependent signal improves canonical exact search.
+- **[RESOLVED BY NOTES 2--3]:** representation-resilient regional summaries are predictable, but the resulting marginal score does not generally improve on lexicographic exact search at meaningful depth.

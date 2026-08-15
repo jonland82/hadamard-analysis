@@ -55,6 +55,7 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Prb}{\mathbb{P}}
 \newcommand{\F}{\mathcal{F}}
+\renewcommand{\bibfont}{\small}
 \newcommand{\takeaway}[1]{%
   \par\medskip
   \noindent\fcolorbox{SignalBlue}{Mist}{%
@@ -78,7 +79,7 @@
 \begin{minipage}{0.965\linewidth}
 \small
 \textbf{Abstract.}
-A Hadamard matrix is exactly constrained as a whole, yet its next serialized entry need not be predictably nonrandom under equivalent presentations.  We ask whether the wrong local object has been predicted.  For a partially exposed row, balance fixes the remaining sign inventory and each partial inner product fixes the remaining agreement inventory with a completed row.  Under randomized coordinate order these inventories induce exact hypergeometric laws for next-block composition.  On held-out equivalence classes of orders $24$ and $28$, those state laws predict regional summaries at block sizes $2,4,8$, including early in construction, while serialized context adds no residual gain after representation randomization.  We then enumerate every immediately feasible block at ambiguous nonterminal states.  At order $28$ and block size $8$, a composite score over all prior-row constraints ranks the observed valid continuation at the $84.8$th percentile early and the $93.2$nd percentile mid-construction, versus the $50$th percentile for random order.  Global rigidity is therefore locally visible---not primarily as the next sign, but as the shape of the correction that remains.  This supplies a theorem-backed branch-ordering candidate for exact search without turning preference into pruning.
+A Hadamard matrix is exactly constrained as a whole, yet its next serialized entry need not be predictably nonrandom under equivalent presentations.  We ask whether the wrong local object has been predicted.  For a partially exposed row, balance fixes the remaining sign inventory and each partial inner product fixes the remaining agreement inventory with a completed row.  Under randomized coordinate order these inventories induce exact hypergeometric laws for next-block composition.  On held-out equivalence classes of orders $24$ and $28$, those state laws predict regional summaries at block sizes $2,4,8$, including early in construction, while serialized context adds no residual gain after representation randomization.  We then enumerate every immediately feasible block at ambiguous nonterminal states.  At order $28$ and block size $8$, a composite score over all prior-row constraints ranks the observed valid continuation at the $84.8$th percentile early and the $93.2$nd percentile mid-construction, versus the $50$th percentile for random order.  Global rigidity is therefore locally visible---not primarily as the next sign, but as the shape of the correction that remains.  This establishes a theorem-backed branch preference, while leaving its search value to an online test.
 \end{minipage}}
 
 \section{The local object was hiding in the state}
@@ -96,7 +97,7 @@ This note closes that conceptual loop.  It first localizes the catalog signal to
 The resulting project sentence is:
 \begin{quote}
 \centering\itshape
-Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state---structure that may guide an exact search.
+Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 \end{quote}
 
 Hadamard equivalence, normalization, and classification are classical \citep{horadam2007,spence1995}.  We use the McKay equivalence-class corpus \citep{mckaydata}; probability forecasts are evaluated by held-out logarithmic loss, a strictly proper score \citep{gneitingraftery2007}.  The contribution is not a new classification or a claim that rows are Markov chains.  It is a change of coordinates on the prediction problem: from the last few printed symbols to the amount of exact correction still owed.
@@ -274,7 +275,7 @@ The all-pair intervals are narrow: $[0.8447,0.8515]$ early and $[0.9293,0.9339]$
 \label{fig:ranking}
 \end{figure}
 
-\takeaway{A solver can calculate the score from its current exact state, and the score strongly prefers the continuation found in held-out valid matrices.  This is the first empirical bridge from global structure to local search action.}
+\takeaway{A solver can calculate the score from its current exact state, and the score strongly prefers the continuation found in held-out valid matrices.  This is an offline bridge from global structure to a local preference; whether that preference survives its own search trajectory is a separate empirical question.}
 
 \section{What the evidence establishes}
 
@@ -282,7 +283,9 @@ The apparent contradiction is resolved.  Global structure need not make the next
 
 The result is stronger than the first note's catalog effect in one sense and weaker in another.  It survives randomized equivalent presentations and is mathematically interpretable.  But \cref{thm:regional} is exact for uniformly reordered remaining coordinates, not a theorem that the unfinished part of every solver state is uniformly distributed over Hadamard completions.  Likewise, \eqref{eq:score} is a useful composite ranking, not a joint probability model.
 
-Most importantly, the observed block is only one continuation from a known complete matrix.  A highly ranked counterfactual block may pass \eqref{eq:feasible} yet admit no full completion.  Offline percentile does not equal first-solution speedup.  The next note must embed $L_{\mathrm{all}}$ in a complete solver, hold exact pruning fixed, and compare nodes and backtracks with random, lexicographic, balance-only, and minimum-pressure orderings.  Statistical scores may reorder feasible branches; they may not delete one.
+Most importantly, the observed block is only one continuation from a known complete matrix.  A highly ranked counterfactual block may pass \eqref{eq:feasible} yet admit no full completion.  Offline percentile does not equal first-solution speedup.  The follow-up solver study embeds $L_{\mathrm{all}}$ in a complete search, holds exact pruning fixed, and compares nodes and backtracks with random, lexicographic, balance-only, and minimum-pressure orderings.  Statistical scores reorder feasible branches; they do not delete one.
+
+That online test sharpens the limitation.  The all-pair score usually beats weak structural policies, but its advantage reverses against a lexicographic baseline as the hidden region grows.  In the full order-$12$ construction from two seed rows, lexicographic search has a median of $74$ visited nodes, whereas the hybrid regional policy has a median of $1{,}385$.  The exact laws here remain correct and the offline ranking remains strong; what fails to compose is the inference from plausible local shape to a globally completable branch.
 
 The evidence also remains finite: two orders, one fixed corpus, and repeated class-level splits rather than a population sample of all Hadamard matrices.  Bootstrap intervals quantify split and representation randomization for that corpus.  They do not establish an asymptotic law.
 
@@ -290,11 +293,12 @@ The evidence also remains finite: two orders, one fixed corpus, and repeated cla
 
 The strong serialized signal lived in the representative.  The stronger structural lesson lives elsewhere: in the debt carried by an unfinished region.  Balance determines how many signs remain; orthogonality determines how many agreements remain; together those debts predict block composition under arbitrary equivalent presentations.  When combined across prior rows, they also rank ambiguous valid continuations far above random.
 
-Thus global choreography does point locally, but its pointing device is not the last few symbols.  It is the evolving constraint state.  The exact-solver experiment now has a principled policy to test and a clean failure condition: if this ranking does not reduce first-solution work, the predictive and algorithmic stories should separate.  If it does, the narrative closes from global law, through regional information, to exact construction.
+Thus global choreography does point locally, but its pointing device is not the last few symbols.  It is the evolving constraint state.  The subsequent exact-solver experiment shows why the distinction matters: knowing the likely composition of the next region does not identify which locally plausible region extends to a complete matrix.  Regional prediction is a real structural result, but completability---or a reliable proxy for branch survival---is the next algorithmic target.
 
 \paragraph{Reproducibility.}
 The repository contains exact corpus verification; all three paired experiments; $120$ passing split audits; $23{,}520$ raw measurements; bootstrap summaries; environment metadata; candidate enumeration and exact feasibility checks; and unit tests for the regional laws and tie-aware ranking.  Raw source downloads remain regenerable from the cited catalog.
 
+\enlargethispage{3\baselineskip}
 \bibliographystyle{plainnat}
 \bibliography{references}
 

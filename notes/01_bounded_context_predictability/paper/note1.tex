@@ -83,7 +83,7 @@
 \begin{minipage}{0.965\linewidth}
 \small
 \textbf{Abstract.}
-A Hadamard matrix is globally rigid: every pair of rows is orthogonal.  Does a reader who sees only the previous few signs gain any useful information about the next one?  We make that question precise for row-wise traversal and separate three possible sources of predictability: normalization, row balance, and the ordering of a chosen representative.  Exact arguments show that one-step prediction is neutral, that balance alone creates higher-order dependence, and that bounded-context statistics need not be invariant under Hadamard equivalence.  We then fit smoothed context models on complete equivalence classes and evaluate them on held-out classes from the McKay catalog.  Across 20 paired repetitions at orders $24$ and $28$, catalog representatives are strongly predictable, but almost all of the gain vanishes after equivalence-preserving row and column permutations.  At order $28$ and context length $8$, the gain over a fair coin is $0.13935$ nats for catalog representatives, $0.03047$ for permuted equivalents, and $0.03033$ for balanced rows.  The residual permuted-minus-balanced contrast is $0.00014$ with a 95\% interval containing zero.  The local signal is therefore real, transferable, and predominantly representational.  This locates---rather than completes---the larger program: use exact global constraints for correctness, and test whether representation-aware local information can safely order an exact search.
+A Hadamard matrix is globally rigid: every pair of rows is orthogonal.  Does a reader who sees only the previous few signs gain any useful information about the next one?  We make that question precise for row-wise traversal and separate three possible sources of predictability: normalization, row balance, and the ordering of a chosen representative.  Exact arguments show that one-step prediction is neutral, that balance alone creates higher-order dependence, and that bounded-context statistics need not be invariant under Hadamard equivalence.  We then fit smoothed context models on complete equivalence classes and evaluate them on held-out classes from the McKay catalog.  Across 20 paired repetitions at orders $24$ and $28$, catalog representatives are strongly predictable, but almost all of the gain vanishes after equivalence-preserving row and column permutations.  At order $28$ and context length $8$, the gain over a fair coin is $0.13935$ nats for catalog representatives, $0.03047$ for permuted equivalents, and $0.03033$ for balanced rows.  The residual permuted-minus-balanced contrast is $0.00014$ with a 95\% interval containing zero.  The local signal is therefore real, transferable, and predominantly representational.  This first result locates the signal; the larger program asks what survives representation, what predicts a region, and whether such prediction actually improves exact search.
 \end{minipage}}
 
 \section{Orthogonality is a global promise; prediction is a local wager}
@@ -94,7 +94,7 @@ The project surrounding this note is organized by one sentence:
 
 \begin{quote}
 \centering\itshape
-Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
+Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 \end{quote}
 
 This first note asks where the local information lives.  Is it intrinsic to a Hadamard equivalence class, is it merely forced by balance, or is it exposed by the particular representative placed on the page?  That distinction matters.  An invariant signal could support a structural theory; a representation-dependent signal could still help a solver that uses the same coordinate convention, but it should not be advertised as a property of the equivalence class.
@@ -319,7 +319,7 @@ Small residual contrasts below $0.001$ nats occur at isolated order-$28$ values 
 
 \section{Why this is the right first note}
 
-The result resolves the first fork in the larger narrative.  ``Globally choreographed'' is exact: orthogonality, normalization, and balance are mathematical constraints.  ``Locally hard to predict'' is true after arbitrary equivalent presentations are admitted: the permuted signal collapses to the balance baseline.  ``Locally informative'' is also true, but conditionally: the catalog coordinate convention exposes a transferable signal.  The final phrase---``enough to guide an exact search''---remains a question, not a result.
+The result resolves the first fork in the larger narrative.  Global order is exact: orthogonality, normalization, and balance are mathematical constraints.  Entrywise readability is conditional: the permuted signal collapses to the balance baseline, while the catalog coordinate convention exposes a transferable signal.  The later question is therefore not simply whether a signal exists, but whether a representation-resilient summary can distinguish branches that belong to a complete whole.
 
 That qualification is useful rather than disappointing.  Exact search algorithms also choose coordinates, normalize partial objects, and break symmetries.  A representation-dependent predictor may help if its training and search conventions match.  It must, however, order branches rather than certify impossibility.
 
@@ -331,7 +331,7 @@ Consider a finite exact search tree in which pruning occurs only through a sound
 Reordering changes only the visitation order of the finite set of unpruned nodes.  Sound pruning removes no feasible leaf, and retaining every unpruned child leaves the reachable leaf set unchanged.  Therefore an exhaustive traversal still visits every feasible leaf.
 \end{proof}
 
-This proposition supplies the bridge to the next experimental note: train on catalog-aligned coordinates, use the score only to choose which sign to try first, and measure first-solution nodes and backtracks against exact baselines.  A poor predictor may slow the search, but it cannot make the search incorrect.
+This proposition supplies the bridge to the next two experiments.  The second note replaces arbitrary serialized context with the evolving constraint state and predicts regional composition.  The third embeds that regional score in an exact solver and measures first-solution nodes and backtracks.  A poor predictor may slow the search, but it cannot make the search incorrect.
 
 Several questions remain deliberately outside the present claim.  We have not isolated which catalog-selection step creates the sequential regularity; tested held-out construction families or orders; averaged uniformly over the full equivalence group; or shown an asymptotic bound on local information.  Nor have we shown a search speedup.  Those are the next links in the chain, and the present result tells us which chain is honest to pursue.
 
@@ -339,7 +339,7 @@ Several questions remain deliberately outside the present claim.  We have not is
 
 A Hadamard matrix can be rigid without being locally readable, and locally readable without that readability being invariant.  The key is to ask not only \emph{whether} a context predicts, but \emph{under which representation}.  Exact mathematics predicts neutrality at one step and balance-induced dependence at longer scales.  Held-out experiments then reveal a much larger signal in catalog representatives, followed by its near-complete collapse under equivalence-preserving randomization.
 
-So the signal is not nowhere; it is somewhere specific.  It lives in the representative.  That makes the next question both narrower and sharper: can an exact search choose the same language and exploit the signal without ever mistaking a preference for a proof?
+So the signal is not nowhere; it is somewhere specific.  It lives in the representative.  That diagnosis motivates a better local object---the constraint summary of an unfinished region---while warning that a forecast about that object is not yet a forecast of eventual completability.
 
 \paragraph{Reproducibility.}
 The repository contains exact matrix verification, context extraction, the smoothed predictor, all 20 split/control repetitions, 80 leakage audits, raw result tables, bootstrap summaries, and environment metadata.  Raw catalog downloads are hash-recorded and regenerated from the cited source.

@@ -1,0 +1,13 @@
+order,hidden_rows,block_size,guided_policy,baseline,pairs,both_solved,guided_only_solved,baseline_only_solved,neither_solved,guided_node_win_rate_both_solved,median_node_ratio_guided_over_baseline_both_solved,geometric_mean_node_ratio_guided_over_baseline_both_solved,median_time_ratio_guided_over_baseline_both_solved
+16,4,2,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.2,1.6330275229357798,1.1821865891535188,2.03257116069916
+16,4,4,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.4,1.1875,1.3199550910316291,1.274077533904999
+16,4,8,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.6,0.7385892116182573,0.6596541699862527,0.9277079693965444
+16,6,2,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,8.890547263681592,10.03494617287904,10.622428633198986
+16,6,4,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,4.872659176029963,6.678962332942553,5.390911107443747
+16,6,8,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,13.102222222222222,9.654566055763562,13.983110429941272
+20,4,2,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,2.1128771551724137,2.2612025749598006,2.784701433548678
+20,4,4,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,2.522,2.352208121450316,2.386771740020703
+20,4,8,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.2,1.3367875647668395,0.9082032085931375,1.3675073704495544
+20,6,2,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,9.761554088369731,8.306203353358006,12.366950991977458
+20,6,4,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,11.511386336396324,8.234637269116813,12.840387511788519
+20,6,8,all_pair_lexicographic,lexicographic,15,12,0,3,0,0.25,11.881222258904662,6.444963080534655,11.16795393015776

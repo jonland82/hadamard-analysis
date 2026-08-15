@@ -4,24 +4,25 @@ This repository studies how exact global organization becomes useful during loca
 
 The one-sentence narrative is:
 
-> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
+> Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 
 The experiments test that sentence clause by clause:
 
-- **Globally choreographed:** orthogonality, balance, normalization, and exact feasibility are mathematical constraints.
-- **Locally elusive entry by entry:** Note 1 and the first part of Note 2 show that strong serialized prediction follows catalog coordinate order and largely disappears under equivalent randomization.
-- **Regionally predictable through constraint state:** Note 2 derives exact remaining-inventory laws and verifies held-out next-block prediction across randomized equivalent presentations.
-- **Structure that may guide exact search:** Note 2's offline all-pair score strongly ranks valid nonterminal blocks; the next note tests whether that ordering reduces first-solution search work without unsafe pruning.
+- **Global order:** orthogonality, balance, normalization, and exact feasibility are mathematical constraints.
+- **Predictable local summaries:** Note 2 derives exact remaining-inventory laws and verifies held-out next-block prediction across randomized equivalent presentations.
+- **Unwise local decisions:** Note 3 shows that regional ordering can improve on random, balance-only, and pressure heuristics, yet the current greedy score loses to a strong lexicographic policy as construction depth grows.
+- **The missing whole:** the next target is residual completability or branch survival beyond a structural baseline.
 
 ## Current documentation
 
 - [`overall_summary.md`](overall_summary.md) gives the conceptual narrative, structural theory, claim registry, search consequences, and open questions.
 - [`research_program.md`](research_program.md) defines the data model, pairs each experiment with mathematical statements, and organizes the work as a sequence of short notes.
 
-## Completed notes
+## Completed notes and experiments
 
 - [`notes/01_bounded_context_predictability/`](notes/01_bounded_context_predictability/) contains the first note, its Python experiments, and the completed robustness results. The compiled workshop paper is [`note1.pdf`](notes/01_bounded_context_predictability/paper/note1.pdf).
 - [`notes/02_representation_ablation/`](notes/02_representation_ablation/) contains the completed representation diagnosis, regional prediction, and candidate-ranking study. The compiled workshop paper is [`note2.pdf`](notes/02_representation_ablation/paper/note2.pdf).
+- [`notes/03_exact_search/`](notes/03_exact_search/) contains the completed controlled exact-search experiments, $2{,}070$ final run records, verification audits, and the four-page manuscript [`note3.pdf`](notes/03_exact_search/paper/note3.pdf).
 
 These root documents are the current source of truth. They deliberately distinguish established facts, derived statements, empirical findings, conjectures, draft definitions, and open questions.
 
@@ -36,7 +37,11 @@ These root documents are the current source of truth. They deliberately distingu
 - The state-aware extension adds $11{,}520$ measurements and 40 passing leakage audits. Exact balance and partial-inner-product state predicts next-block composition under randomized equivalent representations at every tested block size and construction stage.
 - At unrestricted randomized order $28$ and block size $8$, early-stage gains are $0.05724$ nats for row composition and $0.12014$ nats for the most-pressured pair's agreement count. Serialized context adds no gain beyond this state after randomization.
 - The nonterminal ranking closure adds $4{,}320$ policy measurements and 40 passing audits. At unrestricted randomized order $28$, $b=8$, the all-pair score ranks observed continuations at the $84.8$th percentile early and $93.2$nd percentile in the middle, well above balance-only and minimum-pressure policies.
-- We now have representation-resilient regional predictability and offline candidate guidance derived from global correction pressure, although not representation-invariant prediction of individual serialized entries. Note 2 is complete as the four-page manuscript *The Shape of What Remains*; exact-search benefit is the next note.
+- Note 3 implements a complete blockwise solver with policy-independent exact pruning and independently verifies every returned matrix. Its four final result families contain $2{,}070$ runs and $1{,}952$ verified solutions.
+- In the main benchmark, all-pair ordering has a lower condition-level median node count than balance-only in $11/12$ conditions and random ordering in $9/12$, but lexicographic ordering in only $1/12$.
+- In the $20$-presentation $b=8$ closure, the lex-tied hybrid is competitive for four hidden rows at order $16$, but at six hidden rows it costs $6.72$ times as many paired-median nodes as lexicographic at order $16$. At order $20$, it solves $39/60$ runs versus lexicographic's $60/60$, and costs $5.51$ times as many nodes among jointly solved runs.
+- In full order-$12$ construction from two seed rows, both lexicographic and the lex-tied hybrid solve all $15$ runs, but the hybrid uses $7.59$ times as many paired-median nodes and $15.21$ times as much time.
+- The current SAT/CAS transfer gate is not met. The next hypothesis should predict residual completability beyond a structural policy rather than use marginal next-block likelihood as the primary branch order. AWS was not needed for Note 3.
 
 ## Historical context
 

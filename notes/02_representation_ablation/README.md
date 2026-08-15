@@ -9,7 +9,7 @@ Note 1 found strong held-out bounded-context predictability in catalog represent
 
 The revised canonical narrative is:
 
-> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
+> Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 
 The shift is that “local” now means local to the evolving solver state, not merely adjacent in a printed matrix.
 
@@ -72,7 +72,7 @@ python -m hadamard_note1.note2_ranking --orders 24,28 --block-sizes 2,4,8 --max-
 - **[EMPIRICAL]:** for unrestricted randomized order-$28$ matrices at $b=8$, early-stage gains over fair regional guessing are $0.05724$ nats for row composition and $0.12014$ nats for pressured-pair agreement. Middle-stage gains are $0.20139$ and $0.54619$.
 - **[EMPIRICAL]:** serialized context adds no gain beyond constraint state after randomization, while retaining a large catalog-only residual.
 - **[EMPIRICAL]:** on unrestricted randomized order-$28$ matrices at $b=8$, the all-pair score ranks observed valid blocks at the $84.8$th percentile early and $93.2$nd percentile in the middle; $58.6\%$ and $80.0\%$ fall in the top decile. Balance alone reaches only the $56.3$rd and $62.7$th percentiles.
-- **[COMPLETE]:** the mathematical and experimental arc is written as the four-page Note 2 manuscript.
-- **[OPEN]:** whether the ranking reduces first-solution nodes in a complete exact solver; that belongs to the next note.
+- **[COMPLETE]:** the mathematical and experimental arc is written as the four-page Note 2 manuscript, revised to state the Note 3 online-search boundary.
+- **[RESOLVED BY NOTE 3]:** the ranking often reduces nodes relative to random, balance-only, and pressure policies, but does not consistently beat lexicographic search and degrades with construction depth. See [`../03_exact_search/`](../03_exact_search/).
 
 The complete formalism, tables, limitations, and narrative interpretation are in [`RESULTS.md`](RESULTS.md). Raw measurements, bootstrap summaries, and run metadata are under [`results/`](results/).

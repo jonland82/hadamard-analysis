@@ -1,0 +1,9 @@
+order,hidden_rows,block_size,guided_policy,baseline,pairs,both_solved,guided_only_solved,baseline_only_solved,neither_solved,guided_node_win_rate_both_solved,median_node_ratio_guided_over_baseline_both_solved,geometric_mean_node_ratio_guided_over_baseline_both_solved,median_time_ratio_guided_over_baseline_both_solved
+12,10,8,all_pair_lexicographic,balance_only,15,2,13,0,0,1.0,0.17813632851964104,0.11992351121041796,0.2677958240431522
+12,10,8,all_pair_lexicographic,lexicographic,15,15,0,0,0,0.0,7.594594594594595,7.374992504430942,15.211405437393717
+12,10,8,all_pair_lexicographic,minimum_max_pressure,15,1,14,0,0,1.0,0.03507373455559984,0.03507373455559984,0.06222350460470886
+12,10,8,all_pair_lexicographic,random_order,15,1,14,0,0,1.0,0.0035153597251627853,0.0035153597251627853,0.006926261830809313
+12,10,8,all_pair_product,balance_only,15,1,2,1,11,0.0,1.0859704641350212,1.0859704641350212,1.0388673358618825
+12,10,8,all_pair_product,lexicographic,15,3,0,12,0,0.0,307.41333333333336,167.0239659381546,256.5512948690322
+12,10,8,all_pair_product,minimum_max_pressure,15,1,2,0,12,1.0,0.8206456755679553,0.8206456755679553,0.82055290025314
+12,10,8,all_pair_product,random_order,15,1,2,0,12,1.0,0.08225142811488835,0.08225142811488834,0.09133789987060786

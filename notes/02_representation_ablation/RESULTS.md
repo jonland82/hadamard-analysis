@@ -2,7 +2,7 @@
 
 The one-sentence narrative is:
 
-> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
+> Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 
 Note 1 showed that catalog representatives are locally predictable on held-out equivalence classes, while arbitrary equivalent presentations are not meaningfully better than balanced-row controls. Note 2 localizes that difference: the signal is carried mainly by the coordinate order *within* each predicted row or column, not by the order in which independent rows or columns are pooled and not primarily by normalization anchors.
 
@@ -300,7 +300,7 @@ The negative Part I conclusion still holds for individual serialized windows, bu
 
 > Hadamard structure may be locally unpredictable entry by entry, yet globally imposed correction pressures make regional behavior predictable enough to become a candidate guide for exact construction.
 
-The constraint-state predictor is available during search and needs no catalog coordinate convention. Part III now shows that its all-pair score strongly ranks observed valid nonterminal blocks, including after unrestricted representation randomization. Probabilities remain unsafe as pruning rules, and the offline ranking result does not yet show a reduction in nodes or time. A first-solution solver benchmark is the next falsification test and the natural start of the next note.
+The constraint-state predictor is available during search and needs no catalog coordinate convention. Part III shows that its all-pair score strongly ranks observed valid nonterminal blocks, including after unrestricted representation randomization. Probabilities remain unsafe as pruning rules. Note 3 supplies the first-solution falsification test and shows that strong offline percentile does not generally compose into an improvement over lexicographic search.
 
 ## Reproducibility
 
@@ -342,3 +342,7 @@ It completed locally in approximately $118$ seconds. Outputs are:
 - [`candidate_ranking_raw.csv`](results/candidate_ranking_raw.csv): $4{,}320$ paired policy measurements;
 - [`candidate_ranking_raw_summary.csv`](results/candidate_ranking_raw_summary.csv): means and repetition-bootstrap intervals;
 - [`candidate_ranking_raw_metadata.json`](results/candidate_ranking_raw_metadata.json): environment, command, samples, splits, and audits.
+
+## Postscript: exact-search closure
+
+Note 3 embeds the regional all-pair score in a complete controlled solver. The offline ranking does translate into frequent gains over random, balance-only, and minimum-pressure ordering, but it does not consistently beat lexicographic search and deteriorates as more rows must be composed. The full solver, $2{,}070$ run records, verification audits, interpretation, and manuscript are in [`../03_exact_search/`](../03_exact_search/). The Note 2 manuscript has been revised only in framing and conclusion; its mathematical and empirical prediction claims are unchanged.

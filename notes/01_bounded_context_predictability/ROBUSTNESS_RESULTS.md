@@ -111,9 +111,9 @@ The evidence now separates the one-sentence narrative into four claims:
 - global choreography is exact;
 - one-step row-local prediction is exactly neutral under the stated sampling rule;
 - longer canonical contexts carry substantial transferable information, but that information is predominantly representation-dependent;
-- usefulness for exact search remains untested.
+- this experiment alone does not establish usefulness for exact search.
 
-The natural Note 1 theorem--experiment arc is therefore a representation-dependence result. A later search note can ask whether the canonical coordinate convention that creates the signal is also the convention used by an exact solver.
+The natural Note 1 theorem--experiment arc is therefore a representation-dependence result. Notes 2 and 3 subsequently replace serialized context with regional constraint state and test its online use; the regional summaries remain predictive, but the current marginal score does not generally beat lexicographic search.
 
 ## Scope limitations
 

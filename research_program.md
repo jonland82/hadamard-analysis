@@ -4,11 +4,11 @@
 
 The canonical one-sentence research narrative is:
 
-> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
+> Hadamard matrices reveal how global order can make local summaries predictable without making local decisions wise: the constraint state tells us what the next region should look like, but not which plausible region can belong to a complete whole.
 
 The work will be developed as a sequence of short notes. Each experiment is paired with a precise mathematical statement, an empirical hypothesis, and an explicit limitation. The strongest compatible sequence can later be consolidated into a final paper.
 
-The completed Note 1 robustness study narrows the intended reading: catalog representatives are locally predictable at moderate context length, but nearly all of that serialized gain disappears after equivalence-preserving row and column permutations. Note 2 first localizes that effect to within-sequence coordinate order, then shifts from predicting individual entries to regional summaries of a partial construction. Exact balance and partial-inner-product state predicts next-block composition under randomized equivalent presentations, while serialized context adds no residual gain after randomization. We therefore have a representation-resilient global-to-regional signal available to a solver; usefulness for exact search remains open.
+The completed Note 1 robustness study narrows the intended reading: catalog representatives are locally predictable at moderate context length, but nearly all of that serialized gain disappears after equivalence-preserving row and column permutations. Note 2 first localizes that effect to within-sequence coordinate order, then shifts from predicting individual entries to regional summaries of a partial construction. Exact balance and partial-inner-product state predicts next-block composition under randomized equivalent presentations, while serialized context adds no residual gain after randomization. Note 3 embeds that signal in a complete solver. It often improves on weak or stochastic ordering but loses to lexicographic search with increasing construction depth, so regional information is established while general online utility is not.
 
 ## Narrative-to-experiment map
 
@@ -17,9 +17,9 @@ The completed Note 1 robustness study narrows the intended reading: catalog repr
 | **Globally choreographed** | The full matrix obeys exact orthogonality, normalization, balance, symmetry, and partial feasibility constraints. | Structural lemmas establish this; Experiment G will measure their separate algorithmic effects. |
 | **Locally elusive entry by entry** | Short serialized contexts do not retain strong next-sign information across equivalent presentations. | Note 1 and Note 2's representation ablations establish this for the tested corpus. |
 | **Regionally predictable through constraint state** | Partial sums fix remaining sign and agreement inventories, producing held-out next-block information. | Note 2 derives and tests the regional laws at $b=2,4,8$. |
-| **Structure that may guide exact search** | The all-pair score orders feasible blocks without becoming an unsafe pruning rule. | Note 2 establishes offline ranking; Experiments F and G test first-solution work and separate ordering from pruning gains. |
+| **Local decisions need not be wise** | The all-pair score orders feasible blocks without becoming an unsafe pruning rule, but marginal plausibility is not residual completability. | Note 3 finds conditional gains over weak baselines and a depth-dependent reversal against lexicographic construction. |
 
-This table is not merely organizational. It records the dependency structure that already redirected the project once: the serialized signal failed the representation test, so Note 2 moved to constraint-state regions. Experiments F and G now support the final clause only if that offline regional ranking survives a complete solver benchmark.
+This table is not merely organizational. It records the dependency structure that has redirected the project twice: the serialized signal failed the representation test, so Note 2 moved to constraint-state regions; marginal regional likelihood then failed to beat structural search at depth, so the next target must be residual completability beyond a strong baseline.
 
 ## Claim discipline
 
@@ -208,7 +208,7 @@ Fit context-frequency or smoothed Markov predictors on training matrices and eva
 
 Training and evaluating on positions from the same matrix may measure memorization rather than transferable Hadamard structure.
 
-## Note 3 / Experiment C: Conditional entropy and mutual information
+## Deferred supporting experiment C: Conditional entropy and mutual information
 
 **Narrative role:** quantifies how “hard to predict” and “informative” coexist: conditional entropy can remain near one bit while mutual information is small but positive.
 
@@ -269,7 +269,7 @@ Naive plug-in entropy estimators are biased when the number of contexts is large
 
 *Local Predictive Information in Hadamard Matrices*
 
-## Note 4 / Experiment D: Dependence on context length
+## Deferred supporting experiment D: Dependence on context length
 
 **Narrative role:** identifies the scale at which “local” is meaningful and tests whether bounded context stays weak as matrix order grows.
 
@@ -361,13 +361,13 @@ First run paired axis, traversal, and normalization ablations. Then predict next
 
 ### Limitation
 
-A difference in a non-transpose-invariant catalog is not evidence that Hadamard matrices in general have an intrinsic directional asymmetry. The regional state laws are exact under randomized remaining-coordinate order, but their predictive success does not yet prove that candidate blocks ranked by those laws reduce search work.
+A difference in a non-transpose-invariant catalog is not evidence that Hadamard matrices in general have an intrinsic directional asymmetry. The regional state laws are exact under randomized remaining-coordinate order, but Note 3 shows that their predictive success does not generally reduce search work against lexicographic ordering.
 
 ### Results
 
 The completed four-page manuscript is [*The Shape of What Remains*](notes/02_representation_ablation/paper/note2.pdf); full result tables and metadata are in [`notes/02_representation_ablation/`](notes/02_representation_ablation/).
 
-## Note 6 / Experiment F: Statistical branch ordering
+## Note 3 / Experiment F: Statistical branch ordering
 
 **Narrative role:** tests the final clause directly: whether the regional all-pair score guides an exact first-solution search while preserving completeness.
 
@@ -383,23 +383,69 @@ For a fixed finite search tree, ordering can change the number of nodes visited 
 
 **Proof.** A branch policy permutes the order of a node's children but does not change which children exist. Sound pruning removes no path to a valid completion. Because every surviving child is eventually explored, every valid root-to-leaf path is eventually visited regardless of the permutations. If traversal continues to exhaustion, the same argument at every node shows that every policy visits the same fixed tree; only the visitation order differs.
 
-### [CONJECTURE] Empirical statement
+### [DERIVED] Proposition: perfect residual-completability guidance
 
-A predictor trained on held-out local data reduces expected nodes visited before the first valid Hadamard completion relative to lexicographic and random branch ordering.
+For feasible state $s$ and child $x$, define
+
+$$
+V(s,x)=mathbf{1}\{\text{the subtree below }(s,x)\text{ contains a completion}\}.
+$$
+
+If the root is satisfiable and a policy always selects a child with $V(s,x)=1$, it reaches a solution without backtracking. This identifies the ideal online target and distinguishes it from next-block marginal likelihood.
+
+### [DERIVED] Proposition: offline ranking does not imply online efficiency
+
+For every $\varepsilon>0$ and integer $M$, a finite satisfiable search tree can have a policy that selects the successful child on at least a $1-\varepsilon$ fraction of offline successful-path states yet visits at least $M$ nodes before its first solution. Put little offline mass at the root, rank a large dead subtree first there, and rank the demonstrated child correctly downstream. The construction formalizes the distribution-shift failure tested by Note 3.
+
+### [EMPIRICAL] Result
+
+The all-pair regional policy often reduces first-solution nodes relative to balance-only, random, and minimum-pressure ordering, but it does not consistently reduce nodes relative to lexicographic ordering. Its relative performance deteriorates as more rows must be constructed.
 
 ### Experiment
 
-Compare lexicographic, random, empirical $k$-Markov, and optionally learned policies using identical normalization, constraints, instances, stopping conditions, and seeds. Treat node count and backtracks as primary; timing is secondary.
+Compare lexicographic, random, balance-only, minimum-pressure, all-pair, and lex-tied all-pair policies using identical normalization, constraints, instances, stopping conditions, and seeds. Treat node count and backtracks as primary; include solve rate under budget and wall time with ranking overhead.
+
+### Results
+
+The completed experiment suite and four-page manuscript [*Prediction Is Not a Search Policy*](notes/03_exact_search/paper/note3.pdf) are in [`notes/03_exact_search/`](notes/03_exact_search/). Its four final result families contain $2{,}070$ runs and $1{,}952$ independently verified solutions.
+
+In the main $12$ order/depth/block conditions, randomized-tie all-pair ordering has a lower median node count than balance-only in $11$, random in $9$, minimum-pressure in $10$, and lexicographic in only $1$. In the $20$-presentation $b=8$ closure with six hidden rows, the lex-tied hybrid costs $6.72$ times the paired-median lexicographic nodes at order $16$. At order $20$ it solves $39/60$ runs versus lexicographic's $60/60$ and costs $5.51$ times the nodes among jointly solved pairs. In full order-$12$ construction, both policies solve all $15$ runs, but the hybrid costs $7.59$ times the paired-median nodes and $15.21$ times the wall time.
 
 ### Limitation
 
 A branch-ordering claim requires a first-solution or otherwise order-sensitive stopping rule. It cannot reduce the node count of a fixed tree that is fully enumerated.
 
-### Proposed note title
+### Note title
 
-*Complete Hadamard Search with Statistical Branch Ordering*
+*Prediction Is Not a Search Policy*
 
-## Note 7 / Experiment G: Constraint ablation
+## Beyond Note 3: solver transfer
+
+**Narrative role:** determines whether a branch-ordering effect established in the controlled solver remains useful inside stronger exact-search machinery.
+
+### Decision gate: not met
+
+Proceed only if a controlled policy shows a robust reduction in first-solution nodes and a credible net wall-clock improvement against the strongest structural baseline. Note 3 does not meet this requirement, so integration of the present marginal all-pair policy is deferred.
+
+### Deferred engineering step
+
+If a future residual policy first beats lexicographic search, embed that policy into either a mature SAT/CAS workflow or an optimized solver for a structured Hadamard family. Exact propagation, algebraic filtering, canonical symmetry breaking, and solution verification remain authoritative. Statistical information may choose variable polarity, cube priority, candidate-block order, or restart priority, but it may not remove a branch unless an independent exact rule proves that branch impossible.
+
+### Evaluation
+
+Compare the host solver with and without regional guidance on identical instances, budgets, symmetry rules, and hardware. Report conflicts or search nodes, backtracks, wall-clock time, time-to-first-solution distributions, ranking overhead, and verified completions. Test whether the gain survives:
+
+- stronger constraint propagation than the controlled backtracker;
+- canonicalization and symmetry breaking;
+- higher orders and multiple structured construction families;
+- incremental rather than recomputed state scores;
+- difficult completion instances, not only orders with immediate formulaic constructions.
+
+### Interpretation
+
+A positive transfer would show that the residual statistic contributes information not already captured by a mature solver's native heuristics. Note 3 shows why this gate matters: predictive signal can beat weak policies while remaining redundant with, or opposed to, a simple structural heuristic.
+
+## Deferred companion experiment G: Constraint ablation
 
 **Narrative role:** closes the arc by separating gains caused by global choreography and safe pruning from the additional gain caused by local statistical ordering.
 
@@ -494,7 +540,15 @@ $$
 $$
 
 $$
-\text{ablations separate classical constraint gains from statistical gains}.
+\text{controlled search separates regional information from online utility}.
+$$
+
+$$
+\Downarrow
+$$
+
+$$
+\text{the next target is residual completability beyond structural search}.
 $$
 
 ## Execution order
@@ -508,11 +562,14 @@ $$
 7. **Complete:** derive and test state-aware next-block composition laws under randomized equivalent presentations.
 8. **Complete:** show that the all-pair state score ranks ambiguous, nonterminal valid blocks above random, balance-only, one-pair, and minimum-pressure policies.
 9. **Complete:** write Note 2 and revise the canonical narrative around the established global-to-regional result.
-10. **Next:** implement the exact solver and verify all pruning logic with unit tests.
-11. Benchmark whether the state-aware regional policy improves branch ordering under a first-solution stopping rule.
-12. Run the full search ablation and select the strongest supported paper arc.
+10. **Complete:** implement the controlled exact solver and verify its pruning and solution checks with unit tests.
+11. **Complete:** run $2{,}070$ paired exact-search jobs across completion, robustness, hybrid, and full-construction conditions.
+12. **Complete:** establish conditional gains over weak baselines and the depth-dependent failure against lexicographic search.
+13. **Complete:** write Note 3 as the boundary between offline predictive information and online construction utility.
+14. Develop and test residual branch-survival or completion-count prediction on top of a structural baseline.
+15. **Conditional:** transfer a policy into mature SAT/CAS or optimized structured search only after it beats the controlled structural baseline in nodes and net time.
 
-The first four decision points are resolved: the serialized invariant residual is not the signal to build on; the catalog effect lives mainly in within-sequence coordinate order; exact constraint pressure produces a separate, representation-resilient regional signal; and the all-pair score strongly ranks observed valid blocks offline. The next decision is algorithmic: does that ranking reduce first-solution search nodes?
+The first five decision points are resolved: the serialized invariant residual is not the signal to build on; the catalog effect lives mainly in within-sequence coordinate order; exact constraint pressure produces a separate, representation-resilient regional signal; the all-pair score strongly ranks observed valid blocks offline; and that marginal score does not compose into a generally superior online policy. The next decision is whether constraint state can predict residual branch survival beyond lexicographic structure.
 
 ## Standard structure for each short note
 

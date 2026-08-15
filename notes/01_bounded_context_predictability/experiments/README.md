@@ -116,3 +116,7 @@ seed
 ```
 
 Raw counts and metrics should be written in machine-readable form. Figures and tables must be reproducible from those outputs rather than assembled manually.
+
+## Note 3 exact-search extension
+
+The package now also contains `hadamard_note1.note3_solver`, a complete blockwise Hadamard completion solver used to test constraint-state branch ordering. It keeps exact feasibility and symmetry rules fixed across policies, records node, backtrack, budget, timing, and digest audits, and independently verifies every returned matrix. Commands and final outputs are documented in [`../../03_exact_search/`](../../03_exact_search/).

@@ -1,0 +1,270 @@
+{
+  "generated_at_utc": "2026-08-15T03:50:59.273632+00:00",
+  "command": [
+    "C:\\Users\\jonla\\anaconda3\\python.exe",
+    "C:\\hadamard-analysis\\notes\\01_bounded_context_predictability\\experiments\\src\\hadamard_note1\\note3_solver.py",
+    "--orders",
+    "16,20",
+    "--hidden-rows",
+    "4,6",
+    "--block-sizes",
+    "2,4,8",
+    "--policies",
+    "lexicographic,random_order,balance_only,all_pair_product,minimum_max_pressure",
+    "--instances-per-condition",
+    "5",
+    "--tie-repetitions",
+    "3",
+    "--max-nodes",
+    "300000",
+    "--max-seconds",
+    "30",
+    "--workers",
+    "8",
+    "--output",
+    "../../03_exact_search/results/note3_raw.csv"
+  ],
+  "git": {
+    "commit": "820d3e77f30e280d6482b81ebe5f55be5d90463a",
+    "dirty": true
+  },
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "numpy": "2.1.3",
+  "experiment": "note3_exact_hadamard_completion_branch_ordering",
+  "orders": [
+    16,
+    20
+  ],
+  "hidden_rows": [
+    4,
+    6
+  ],
+  "block_sizes": [
+    2,
+    4,
+    8
+  ],
+  "policies": [
+    "lexicographic",
+    "random_order",
+    "balance_only",
+    "all_pair_product",
+    "minimum_max_pressure"
+  ],
+  "instances_per_condition": 5,
+  "tie_repetitions": 3,
+  "base_seed": 20260815,
+  "max_nodes": 300000,
+  "max_seconds": 30.0,
+  "workers": 8,
+  "jobs": 900,
+  "all_solutions_verified": true,
+  "target_hidden_from_solver": true,
+  "instance_audit": [
+    {
+      "instance_id": "d16-c0-h4-s21864815",
+      "order": 16,
+      "class_index": 0,
+      "presentation_seed": 21864815,
+      "hidden_rows": 4,
+      "seed_rows": 12,
+      "target_digest": "b7faa5b885b41898600fc0346af01157dfe9859be4cad07caa2f46dabc3eb156",
+      "seed_digest": "48ccfef7f142571e4f0b4c6aa4e6c66d012bb3d0cf526a854a8440724a2838e1"
+    },
+    {
+      "instance_id": "d16-c1-h4-s21864816",
+      "order": 16,
+      "class_index": 1,
+      "presentation_seed": 21864816,
+      "hidden_rows": 4,
+      "seed_rows": 12,
+      "target_digest": "f20b8509c9a648539b7301c2dfe55da4a46ec7a87477aeb9933a9e6583ce3c12",
+      "seed_digest": "634b1b2d54c4314ea39c7f51035ef005ae6a2fbacd689a5ede8702bd536cd5a6"
+    },
+    {
+      "instance_id": "d16-c2-h4-s21864817",
+      "order": 16,
+      "class_index": 2,
+      "presentation_seed": 21864817,
+      "hidden_rows": 4,
+      "seed_rows": 12,
+      "target_digest": "843ba0af4b6bb5c548b0225ed3da86b94527b40d8b4a48ffe465506ab4457dbe",
+      "seed_digest": "1f0fad482681da78b4bb128ffc8e315b5a3c3a91b504adceabdf9481ba8971d7"
+    },
+    {
+      "instance_id": "d16-c3-h4-s21864818",
+      "order": 16,
+      "class_index": 3,
+      "presentation_seed": 21864818,
+      "hidden_rows": 4,
+      "seed_rows": 12,
+      "target_digest": "a09a081504121688a8ae053bbe9f7844bd3655e94537cfbb711998b705f5da13",
+      "seed_digest": "52e361edb8f6a1e014649e53d70b17fed3a688c3a33698cd8d354ea79a5648e2"
+    },
+    {
+      "instance_id": "d16-c4-h4-s21864819",
+      "order": 16,
+      "class_index": 4,
+      "presentation_seed": 21864819,
+      "hidden_rows": 4,
+      "seed_rows": 12,
+      "target_digest": "a5a7df727c1c1becf1e9db797bef4a2c2daa44509adc22ad634486429db0abd6",
+      "seed_digest": "9cd928e2beb4b39954b56069ecec15fc731fd4357aca00a544cc5975377ae27d"
+    },
+    {
+      "instance_id": "d16-c0-h6-s21866815",
+      "order": 16,
+      "class_index": 0,
+      "presentation_seed": 21866815,
+      "hidden_rows": 6,
+      "seed_rows": 10,
+      "target_digest": "4b076880aa5186b0022d38aa5633e22b5ec23b254b22374ade46dd78ec972dcc",
+      "seed_digest": "607a9337f15d4c6bb16d1eddf32bb8211e99654d8aa4d685577c8a760bd55fe8"
+    },
+    {
+      "instance_id": "d16-c1-h6-s21866816",
+      "order": 16,
+      "class_index": 1,
+      "presentation_seed": 21866816,
+      "hidden_rows": 6,
+      "seed_rows": 10,
+      "target_digest": "80c8ea58d3a780b1599e49acc565693c66fdda312d6dca51378e772452fafb93",
+      "seed_digest": "83efeb6a7051807221bcac813633a071eb9a578b171e6f54123b355c9f206c1a"
+    },
+    {
+      "instance_id": "d16-c2-h6-s21866817",
+      "order": 16,
+      "class_index": 2,
+      "presentation_seed": 21866817,
+      "hidden_rows": 6,
+      "seed_rows": 10,
+      "target_digest": "6c740f23759133b475c266b3efbf3ab8158f049b493548a50a390f8cb687a21f",
+      "seed_digest": "abdd2f849136dbd21ce7bba431de9892aaf7d51c8f12cd8081a30bd9274ba532"
+    },
+    {
+      "instance_id": "d16-c3-h6-s21866818",
+      "order": 16,
+      "class_index": 3,
+      "presentation_seed": 21866818,
+      "hidden_rows": 6,
+      "seed_rows": 10,
+      "target_digest": "99fd1d3867001450f5bb49d404b1ebf18bb1a4e57d09dd4c5b1f20beb60899bb",
+      "seed_digest": "aa36838f7ba9fffb358fb0923ef550233bebb9e3d5267fc9e0fe723f7cc6ac07"
+    },
+    {
+      "instance_id": "d16-c4-h6-s21866819",
+      "order": 16,
+      "class_index": 4,
+      "presentation_seed": 21866819,
+      "hidden_rows": 6,
+      "seed_rows": 10,
+      "target_digest": "8a2f5580f7f8236f680831fc45e08be07bf0e47ae71847a2dc3ec2b4556912ce",
+      "seed_digest": "49df4d71104a22b55be2adb4ed4c0f44ba042b22c5202c3fc3d08404b70540b4"
+    },
+    {
+      "instance_id": "d20-c0-h4-s22264815",
+      "order": 20,
+      "class_index": 0,
+      "presentation_seed": 22264815,
+      "hidden_rows": 4,
+      "seed_rows": 16,
+      "target_digest": "2d52ad7420551bc7d387999b608d10ca3d7b3d9abf107583813d20e4bc22e774",
+      "seed_digest": "0d5f399c0c571861c05e470ad9a1bfa5c2ccc2918143ba0e336b4725d2ccc1e0"
+    },
+    {
+      "instance_id": "d20-c1-h4-s22264816",
+      "order": 20,
+      "class_index": 1,
+      "presentation_seed": 22264816,
+      "hidden_rows": 4,
+      "seed_rows": 16,
+      "target_digest": "832b8ade6e41068e7a8a1c5cbfae7c109aef3df45749dd733db6a365561e3986",
+      "seed_digest": "bd8ee64c527eae2f582219bc517f2769c6441d6a04b98387b3073eb9c47f672b"
+    },
+    {
+      "instance_id": "d20-c2-h4-s22264817",
+      "order": 20,
+      "class_index": 2,
+      "presentation_seed": 22264817,
+      "hidden_rows": 4,
+      "seed_rows": 16,
+      "target_digest": "b60fa1d091d681a3ba311e4ce5ac21ca849874ae52effcc53ae09ab9815e2642",
+      "seed_digest": "3def0bcf30def55b97f808eb4701973dc288a0660e7305d52f8243659ef2e738"
+    },
+    {
+      "instance_id": "d20-c0-h4-s22264818",
+      "order": 20,
+      "class_index": 0,
+      "presentation_seed": 22264818,
+      "hidden_rows": 4,
+      "seed_rows": 16,
+      "target_digest": "6decd09cc1b5a8194264c2e05efd20e483029ef8984c0fb4fccd6da4aaea66d2",
+      "seed_digest": "9e8635273dd192cf0b7fc14bf604c4fe002e9dc3584200ca2dc19db43079f579"
+    },
+    {
+      "instance_id": "d20-c1-h4-s22264819",
+      "order": 20,
+      "class_index": 1,
+      "presentation_seed": 22264819,
+      "hidden_rows": 4,
+      "seed_rows": 16,
+      "target_digest": "abedb01b033ab855d2c58868245ea6d4d08e37282e6e4c391723eee7415c70ca",
+      "seed_digest": "108be3514f8ac49bad5b1e30037ec28bc82ebbb30711238052253cbc79cdb4cb"
+    },
+    {
+      "instance_id": "d20-c0-h6-s22266815",
+      "order": 20,
+      "class_index": 0,
+      "presentation_seed": 22266815,
+      "hidden_rows": 6,
+      "seed_rows": 14,
+      "target_digest": "816429e3ee5c2cf9031b9cd16a714624ed1d921a9db532c2b95b24032ad397c6",
+      "seed_digest": "70db1fecdf6d8ee378662a3fab2ffaf576376658a05d1f53130a0cb5b86e0418"
+    },
+    {
+      "instance_id": "d20-c1-h6-s22266816",
+      "order": 20,
+      "class_index": 1,
+      "presentation_seed": 22266816,
+      "hidden_rows": 6,
+      "seed_rows": 14,
+      "target_digest": "22497a5c9c34615eb7343a7cdcacf49405b0a4fe133c981e4230c3ca4a3e2bb4",
+      "seed_digest": "4259c89e9722f9c5880bbed1162f1d4f4603b21c75580e2f2e01ae7dcd2172c8"
+    },
+    {
+      "instance_id": "d20-c2-h6-s22266817",
+      "order": 20,
+      "class_index": 2,
+      "presentation_seed": 22266817,
+      "hidden_rows": 6,
+      "seed_rows": 14,
+      "target_digest": "e5b138a8f62d12afe5e27d42783d08e4417d4f5066eaaddcf45e9478293450a4",
+      "seed_digest": "6814c23a600100fb6fd9aa710bf644ea3d259590adbbf9cbfd28ac69812f335f"
+    },
+    {
+      "instance_id": "d20-c0-h6-s22266818",
+      "order": 20,
+      "class_index": 0,
+      "presentation_seed": 22266818,
+      "hidden_rows": 6,
+      "seed_rows": 14,
+      "target_digest": "a9bb0595fe2df3d10581faf1fe31b9f5c5049edf3cd5eb7a1d33eb3b0948549b",
+      "seed_digest": "465794cbaad1cedf872536f20cf7ee5605a00a1b9556743c277b72e99bd3f376"
+    },
+    {
+      "instance_id": "d20-c1-h6-s22266819",
+      "order": 20,
+      "class_index": 1,
+      "presentation_seed": 22266819,
+      "hidden_rows": 6,
+      "seed_rows": 14,
+      "target_digest": "8a846155d57200c1e8a8c817b8959973d03d4430d312650d9b883e2e2bc258f2",
+      "seed_digest": "48ffc4616eaa29d29aacc411edd9ba879b250bacde78d807a606db2a62ada974"
+    }
+  ],
+  "raw_output": "..\\..\\03_exact_search\\results\\note3_raw.csv",
+  "summary_output": "..\\..\\03_exact_search\\results\\note3_raw_summary.csv",
+  "paired_output": "..\\..\\03_exact_search\\results\\note3_raw_paired.csv",
+  "paired_summary_output": "..\\..\\03_exact_search\\results\\note3_raw_paired_summary.csv"
+}
