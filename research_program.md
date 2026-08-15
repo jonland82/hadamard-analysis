@@ -2,24 +2,24 @@
 
 ## Purpose
 
-The canonical one-sentence research hypothesis is:
+The canonical one-sentence research narrative is:
 
-> Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
+> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
 
 The work will be developed as a sequence of short notes. Each experiment is paired with a precise mathematical statement, an empirical hypothesis, and an explicit limitation. The strongest compatible sequence can later be consolidated into a final paper.
 
-The completed Note 1 robustness study narrows the intended reading: canonical representatives are locally predictable at moderate context length, but nearly all of that gain disappears after equivalence-preserving row and column permutations and becomes statistically indistinguishable from the balanced-row baseline at the primary comparison. Thus local information is currently established as a representation-dependent empirical signal; generalization beyond the fixed catalog and usefulness for exact search remain open.
+The completed Note 1 robustness study narrows the intended reading: catalog representatives are locally predictable at moderate context length, but nearly all of that serialized gain disappears after equivalence-preserving row and column permutations. Note 2 first localizes that effect to within-sequence coordinate order, then shifts from predicting individual entries to regional summaries of a partial construction. Exact balance and partial-inner-product state predicts next-block composition under randomized equivalent presentations, while serialized context adds no residual gain after randomization. We therefore have a representation-resilient global-to-regional signal available to a solver; usefulness for exact search remains open.
 
 ## Narrative-to-experiment map
 
 | One-sentence clause | What must be established | Experiments and notes |
 |---|---|---|
-| **Globally choreographed** | The full matrix obeys exact orthogonality, normalization, balance, symmetry, and partial feasibility constraints. | The structural lemmas are the starting point; Experiment G measures their separate algorithmic effects. |
-| **Locally hard to predict** | Bounded context leaves high conditional entropy and only small conditional bias under an explicit probability model. | Experiments A and C measure bias and entropy; D studies the context scale; E tests traversal dependence. |
-| **Still locally informative** | The local signal is nonzero, survives controls, and improves held-out prediction. | Experiment B tests predictive log loss; A and C determine whether the signal exceeds balance-only information. |
-| **Enough to guide exact search** | The signal improves the order in which feasible branches are explored without becoming an unsafe pruning rule. | Experiment F tests first-solution node reduction; G separates ordering gains from exact pruning gains. |
+| **Globally choreographed** | The full matrix obeys exact orthogonality, normalization, balance, symmetry, and partial feasibility constraints. | Structural lemmas establish this; Experiment G will measure their separate algorithmic effects. |
+| **Locally elusive entry by entry** | Short serialized contexts do not retain strong next-sign information across equivalent presentations. | Note 1 and Note 2's representation ablations establish this for the tested corpus. |
+| **Regionally predictable through constraint state** | Partial sums fix remaining sign and agreement inventories, producing held-out next-block information. | Note 2 derives and tests the regional laws at $b=2,4,8$. |
+| **Structure that may guide exact search** | The all-pair score orders feasible blocks without becoming an unsafe pruning rule. | Note 2 establishes offline ranking; Experiments F and G test first-solution work and separate ordering from pruning gains. |
 
-This table is not merely organizational. It gives the dependency structure of the argument. Experiments F and G support the full narrative only if Experiments A--C first identify reproducible, held-out local information. A null result earlier in the chain should shorten or redirect the later notes.
+This table is not merely organizational. It records the dependency structure that already redirected the project once: the serialized signal failed the representation test, so Note 2 moved to constraint-state regions. Experiments F and G now support the final clause only if that offline regional ranking survives a complete solver benchmark.
 
 ## Claim discipline
 
@@ -122,7 +122,7 @@ Experiments F--G generate solver-run data rather than next-sign observations. Ea
 
 ## Note 1 / Experiment A: Balance and local conditional bias
 
-**Narrative role:** distinguishes the unavoidable dependence created by global choreography from any additional Hadamard-specific local signal, and begins the test of “locally hard to predict.”
+**Narrative role:** distinguishes unavoidable balance dependence from representation-specific adjacency and begins the test of “locally elusive entry by entry.”
 
 ### Question
 
@@ -166,7 +166,7 @@ The result is conditional on the fixed catalog, row-reset traversal, representat
 
 [*Where the Signal Lives: Bounded-Context Prediction in Hadamard Representatives*](notes/01_bounded_context_predictability/paper/note1.pdf)
 
-## Note 2 / Experiment B: Predictive log loss
+## Experiment B: Predictive log loss (completed within Note 1)
 
 **Narrative role:** tests the word “informative” by requiring the local signal to improve probability forecasts on held-out matrices, not merely appear in in-sample counts.
 
@@ -196,9 +196,9 @@ $$
 
 When it is not marginally unbiased, the primary comparison should also include the best unconditional predictor so that marginal and contextual information are separated.
 
-### [CONJECTURE] Empirical statement
+### [EMPIRICAL] Result
 
-A local predictor achieves held-out log loss below both the marginal-only predictor and the corresponding balanced-sequence baseline.
+The smoothed context predictor improves held-out log loss substantially for catalog representatives. Under unrestricted equivalence-preserving permutations, its order-$28$, $k=8$ gain becomes statistically indistinguishable from the balanced-row baseline. This experiment was incorporated into Note 1 rather than reserved for a separate note.
 
 ### Experiment
 
@@ -207,10 +207,6 @@ Fit context-frequency or smoothed Markov predictors on training matrices and eva
 ### Limitation
 
 Training and evaluating on positions from the same matrix may measure memorization rather than transferable Hadamard structure.
-
-### Proposed note title
-
-*Out-of-Sample Local Prediction in Hadamard Ensembles*
 
 ## Note 3 / Experiment C: Conditional entropy and mutual information
 
@@ -317,9 +313,9 @@ Finite-sample estimates need not look monotone because longer contexts become sp
 
 *The Context Scale of Predictability in Hadamard Matrices*
 
-## Note 5 / Experiment E: Row and column traversal
+## Note 2 / Experiment E: From representation diagnosis to constraint-state regions
 
-**Narrative role:** tests whether local unpredictability is a property of the chosen ensemble or an artifact of how the globally structured matrix is read.
+**Narrative role:** shows why serialized adjacency is the wrong invariant local object, then replaces it with the evolving balance and orthogonality state.
 
 ### Question
 
@@ -345,25 +341,35 @@ and the corresponding mutual informations are equal.
 
 The proof is the measure-preserving correspondence between row observations of $H$ and column observations of $H^\top$.
 
-### [OPEN] Diagnostic statement
+### [DERIVED] Lemma: pooled-sequence invariance
 
-An observed row--column difference must be traced to sampling variation or to a failure of transpose invariance in the ensemble, representative selection, normalization, boundary rules, or family composition.
+With row boundaries reset, permuting whole rows leaves every row-reset context count unchanged. Dually, permuting whole columns leaves every column-reset context count unchanged. A permutation of the opposite axis changes coordinate order within each sequence and may change the counts.
+
+### [EMPIRICAL] Result
+
+Both exact negative controls pass to numerical precision. At $k=8$, disrupting within-row coordinate order reduces catalog gain by $0.13361$ nats/entry at order $24$ and $0.10895$ at order $28$; the column-reset experiment gives the dual result. Strict-interior prediction retains most of the catalog gain, so deterministic normalization anchors are not its main source.
+
+This negative result motivates a different local object. For a partial row, balance fixes the number of remaining plus signs, and each partial inner product fixes the number of remaining agreements with a completed row. Under randomized remaining-coordinate order, next-block counts are hypergeometric. The completed extension tests block sizes $b=2,4,8$ and finds positive early-, middle-, and late-stage held-out gain under both fixed-anchor and unrestricted equivalent randomizations. At unrestricted randomized order $28$, $b=8$, early gains are $0.05724$ nats for row composition and $0.12014$ nats for the agreement count with the most-pressured previous row.
+
+Serialized context adds no gain beyond constraint state after randomization. It retains a large catalog-only residual, cleanly separating representation-specific adjacency from representation-resilient correction pressure.
+
+The completed nonterminal ranking closure enumerates every $b\le8$ candidate, filters by immediate exact feasibility, and ranks observed valid continuations. The all-pair composite score outperforms balance-only, random-pair, pressured-pair, and minimum-worst-pressure policies under both randomized presentations. At unrestricted randomized order $28$, $b=8$, it reaches the $0.8481$ percentile early and $0.9316$ percentile in the middle.
 
 ### Experiment
 
-Run identical estimators for paired row and column traversals. Test the dataset and preprocessing pipeline for transpose closure before interpreting any difference structurally.
+First run paired axis, traversal, and normalization ablations. Then predict next-block row composition and pressured-pair agreement at $b=2,4,8$ from the exact partial state under catalog and randomized presentations. Finally enumerate immediately feasible nonterminal blocks and compare random, balance-only, one-pair, all-pair, and minimum-pressure ranking policies. Reuse identical class splits and report paired intervals throughout.
 
 ### Limitation
 
-A difference in a non-transpose-invariant dataset is not evidence that Hadamard matrices in general have an intrinsic directional asymmetry.
+A difference in a non-transpose-invariant catalog is not evidence that Hadamard matrices in general have an intrinsic directional asymmetry. The regional state laws are exact under randomized remaining-coordinate order, but their predictive success does not yet prove that candidate blocks ranked by those laws reduce search work.
 
-### Proposed note title
+### Results
 
-*Transpose Symmetry and Traversal Dependence in Hadamard Data*
+The completed four-page manuscript is [*The Shape of What Remains*](notes/02_representation_ablation/paper/note2.pdf); full result tables and metadata are in [`notes/02_representation_ablation/`](notes/02_representation_ablation/).
 
 ## Note 6 / Experiment F: Statistical branch ordering
 
-**Narrative role:** tests the final clause directly: whether weak local information is useful enough to guide an exact first-solution search while preserving completeness.
+**Narrative role:** tests the final clause directly: whether the regional all-pair score guides an exact first-solution search while preserving completeness.
 
 ### Question
 
@@ -448,7 +454,7 @@ An ablation attributes performance within the tested solver design; it does not 
 The proposed notes form the following chain:
 
 $$
-\text{global balance creates a calculable local dependence}
+\text{global balance and orthogonality create exact correction inventories}
 $$
 
 $$
@@ -456,7 +462,7 @@ $$
 $$
 
 $$
-\text{Hadamard orthogonality may contribute additional information}
+\text{serialized adjacency proves representation-sensitive}
 $$
 
 $$
@@ -464,7 +470,7 @@ $$
 $$
 
 $$
-\text{bias, log loss, and entropy quantify that information}
+\text{partial constraint state yields regional hypergeometric laws}
 $$
 
 $$
@@ -472,7 +478,7 @@ $$
 $$
 
 $$
-\text{context and transpose tests identify its scale and source}
+\text{held-out experiments verify representation-resilient block prediction}
 $$
 
 $$
@@ -480,7 +486,7 @@ $$
 $$
 
 $$
-\text{the signal guides a complete first-solution search}
+\text{the all-pair score ranks ambiguous nonterminal blocks}
 $$
 
 $$
@@ -498,12 +504,15 @@ $$
 3. **Complete:** run the repeated class splits, leakage audits, order sweep, and context sweep for Note 1.
 4. **Complete:** establish that canonical representatives carry held-out local signal but that no practically meaningful residual beyond balance is detected after equivalence-preserving permutation at the primary comparison.
 5. **Complete:** write Note 1 as a representation-dependence result, with the fixed-catalog and small-order limitations explicit.
-6. **Next:** test transpose/traversal dependence separately if needed for the later local-statistics arc.
-7. Implement the exact solver and verify all pruning logic with unit tests.
-8. Benchmark whether the representation-dependent predictor improves branch ordering under a first-solution stopping rule.
-9. Run the full search ablation and select the strongest supported paper arc.
+6. **Complete:** localize the catalog signal with paired row/column traversal, axis-permutation, and normalization ablations.
+7. **Complete:** derive and test state-aware next-block composition laws under randomized equivalent presentations.
+8. **Complete:** show that the all-pair state score ranks ambiguous, nonterminal valid blocks above random, balance-only, one-pair, and minimum-pressure policies.
+9. **Complete:** write Note 2 and revise the canonical narrative around the established global-to-regional result.
+10. **Next:** implement the exact solver and verify all pruning logic with unit tests.
+11. Benchmark whether the state-aware regional policy improves branch ordering under a first-solution stopping rule.
+12. Run the full search ablation and select the strongest supported paper arc.
 
-The first decision point is now resolved: the invariant residual is not the signal to build on. Any search heuristic should instead test the strong canonical-coordinate signal under a solver using the same representation convention.
+The first four decision points are resolved: the serialized invariant residual is not the signal to build on; the catalog effect lives mainly in within-sequence coordinate order; exact constraint pressure produces a separate, representation-resilient regional signal; and the all-pair score strongly ranks observed valid blocks offline. The next decision is algorithmic: does that ranking reduce first-solution search nodes?
 
 ## Standard structure for each short note
 

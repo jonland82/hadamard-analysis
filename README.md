@@ -1,26 +1,27 @@
 # Hadamard Analysis
 
-This repository studies a simple tension: a Hadamard matrix is exactly organized as a whole, but a bounded local view may still reveal little about the next entry. The project asks how to measure that local information and whether it can guide an exact search without compromising completeness.
+This repository studies how exact global organization becomes useful during local construction. A Hadamard matrix may reveal little through the last few printed entries, while the evolving balance and orthogonality state sharply constrains the composition of the region that remains. The project measures that regional information and asks whether it can guide an exact search without compromising completeness.
 
 The one-sentence narrative is:
 
-> Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
+> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
 
 The experiments test that sentence clause by clause:
 
-- **Globally choreographed:** established orthogonality, balance, normalization, and exact pruning supply the theory; Experiment G measures their separate search effects.
-- **Locally hard to predict:** Experiments A, C, D, and E measure conditional bias, remaining entropy, context-scale behavior, and traversal dependence.
-- **Still locally informative:** Experiment B asks whether the small signal improves held-out probabilistic prediction.
-- **Enough to guide exact search:** Experiment F tests whether that signal reduces first-solution search work without pruning statistically disfavored branches; Experiment G separates this gain from exact constraint gains.
+- **Globally choreographed:** orthogonality, balance, normalization, and exact feasibility are mathematical constraints.
+- **Locally elusive entry by entry:** Note 1 and the first part of Note 2 show that strong serialized prediction follows catalog coordinate order and largely disappears under equivalent randomization.
+- **Regionally predictable through constraint state:** Note 2 derives exact remaining-inventory laws and verifies held-out next-block prediction across randomized equivalent presentations.
+- **Structure that may guide exact search:** Note 2's offline all-pair score strongly ranks valid nonterminal blocks; the next note tests whether that ordering reduces first-solution search work without unsafe pruning.
 
 ## Current documentation
 
 - [`overall_summary.md`](overall_summary.md) gives the conceptual narrative, structural theory, claim registry, search consequences, and open questions.
 - [`research_program.md`](research_program.md) defines the data model, pairs each experiment with mathematical statements, and organizes the work as a sequence of short notes.
 
-## Active note
+## Completed notes
 
 - [`notes/01_bounded_context_predictability/`](notes/01_bounded_context_predictability/) contains the first note, its Python experiments, and the completed robustness results. The compiled workshop paper is [`note1.pdf`](notes/01_bounded_context_predictability/paper/note1.pdf).
+- [`notes/02_representation_ablation/`](notes/02_representation_ablation/) contains the completed representation diagnosis, regional prediction, and candidate-ranking study. The compiled workshop paper is [`note2.pdf`](notes/02_representation_ablation/paper/note2.pdf).
 
 These root documents are the current source of truth. They deliberately distinguish established facts, derived statements, empirical findings, conjectures, draft definitions, and open questions.
 
@@ -31,7 +32,11 @@ These root documents are the current source of truth. They deliberately distingu
 - The earlier informal "Markov result" has not yet been reconstructed from data or code.
 - Note 1 now includes a verified small-order McKay corpus pipeline, fixed-context predictors, matched controls, 20 paired repetitions, bootstrap intervals, and 80 passing leakage audits.
 - At the primary order-$28$, $k=8$ comparison, canonical representatives gain $0.13935$ nats over a fair coin, while permuted equivalents gain $0.03047$ and balanced rows gain $0.03033$. The paired permuted-minus-balanced interval includes zero.
-- The evidence supports representation-dependent local predictability, not an equivalence-invariant local law. Whether that signal is enough to guide exact search is still untested. See [`ROBUSTNESS_RESULTS.md`](notes/01_bounded_context_predictability/ROBUSTNESS_RESULTS.md).
+- Note 2 adds $7{,}680$ measurements over 20 paired repetitions and 40 passing leakage audits. It shows that the representation-dependent signal lives mainly in coordinate order within rows or columns, not in the order of pooled rows or columns and not primarily in normalization anchors.
+- The state-aware extension adds $11{,}520$ measurements and 40 passing leakage audits. Exact balance and partial-inner-product state predicts next-block composition under randomized equivalent representations at every tested block size and construction stage.
+- At unrestricted randomized order $28$ and block size $8$, early-stage gains are $0.05724$ nats for row composition and $0.12014$ nats for the most-pressured pair's agreement count. Serialized context adds no gain beyond this state after randomization.
+- The nonterminal ranking closure adds $4{,}320$ policy measurements and 40 passing audits. At unrestricted randomized order $28$, $b=8$, the all-pair score ranks observed continuations at the $84.8$th percentile early and $93.2$nd percentile in the middle, well above balance-only and minimum-pressure policies.
+- We now have representation-resilient regional predictability and offline candidate guidance derived from global correction pressure, although not representation-invariant prediction of individual serialized entries. Note 2 is complete as the four-page manuscript *The Shape of What Remains*; exact-search benefit is the next note.
 
 ## Historical context
 

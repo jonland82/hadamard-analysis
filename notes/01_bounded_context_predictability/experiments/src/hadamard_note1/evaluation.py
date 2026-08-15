@@ -36,25 +36,16 @@ def _constant_probabilities(size: int, probability_plus: float) -> NDArray[np.fl
     return np.full(size, probability_plus, dtype=np.float64)
 
 
-def evaluate_context_model(
-    train_matrices: Sequence[NDArray[np.int64]],
-    test_matrices: Sequence[NDArray[np.int64]],
+def _evaluate_batches(
+    train: ObservationBatch,
+    test: ObservationBatch,
     context_length: int,
     *,
-    alpha: float = 0.5,
-    reset_at_row_boundary: bool = False,
-    exclude_first_row: bool = False,
-    exclude_first_column: bool = False,
+    alpha: float,
+    reset_at_row_boundary: bool,
+    exclude_first_row: bool,
+    exclude_first_column: bool,
 ) -> dict[str, float | int | bool]:
-    """Fit one context model and return training/held-out metrics."""
-
-    options = {
-        "reset_at_row_boundary": reset_at_row_boundary,
-        "exclude_first_row": exclude_first_row,
-        "exclude_first_column": exclude_first_column,
-    }
-    train = _extract_many(train_matrices, context_length, **options)
-    test = _extract_many(test_matrices, context_length, **options)
     if len(train) == 0 or len(test) == 0:
         raise ValueError("both training and test splits must produce observations")
 
@@ -91,3 +82,76 @@ def evaluate_context_model(
         "test_epsilon_avg": test_eps_avg,
         "fair_log_loss_constant": log(2.0),
     }
+
+
+def evaluate_context_model(
+    train_matrices: Sequence[NDArray[np.int64]],
+    test_matrices: Sequence[NDArray[np.int64]],
+    context_length: int,
+    *,
+    alpha: float = 0.5,
+    reset_at_row_boundary: bool = False,
+    exclude_first_row: bool = False,
+    exclude_first_column: bool = False,
+) -> dict[str, float | int | bool]:
+    """Fit one context model and return training/held-out metrics."""
+
+    options = {
+        "reset_at_row_boundary": reset_at_row_boundary,
+        "exclude_first_row": exclude_first_row,
+        "exclude_first_column": exclude_first_column,
+    }
+    train = _extract_many(train_matrices, context_length, **options)
+    test = _extract_many(test_matrices, context_length, **options)
+    return _evaluate_batches(
+        train,
+        test,
+        context_length,
+        alpha=alpha,
+        **options,
+    )
+
+
+def _batch_from_sequences(
+    sequences: NDArray[np.int64],
+    context_length: int,
+) -> ObservationBatch:
+    if sequences.ndim != 2:
+        raise ValueError("sequences must have shape (sequence_count, sequence_length)")
+    if not np.all((sequences == -1) | (sequences == 1)):
+        raise ValueError("sequences must contain only signs")
+    if sequences.shape[1] <= context_length:
+        raise ValueError("sequence length must exceed context length")
+    windows = np.lib.stride_tricks.sliding_window_view(
+        sequences,
+        context_length + 1,
+        axis=1,
+    )
+    return ObservationBatch(
+        contexts=np.asarray(windows[..., :-1].reshape(-1, context_length), dtype=np.int64),
+        targets=np.asarray(windows[..., -1].reshape(-1), dtype=np.int64),
+    )
+
+
+def evaluate_sequence_model(
+    train_sequences: NDArray[np.int64],
+    test_sequences: NDArray[np.int64],
+    context_length: int,
+    *,
+    alpha: float = 0.5,
+    exclude_first_row: bool = False,
+    exclude_first_column: bool = False,
+) -> dict[str, float | int | bool]:
+    """Evaluate already-oriented independent sequences without per-matrix extraction."""
+
+    train = _batch_from_sequences(train_sequences, context_length)
+    test = _batch_from_sequences(test_sequences, context_length)
+    return _evaluate_batches(
+        train,
+        test,
+        context_length,
+        alpha=alpha,
+        reset_at_row_boundary=True,
+        exclude_first_row=exclude_first_row,
+        exclude_first_column=exclude_first_column,
+    )

@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from hadamard_note1.contexts import ObservationBatch, extract_contexts
-from hadamard_note1.evaluation import evaluate_context_model
+from hadamard_note1.evaluation import evaluate_context_model, evaluate_sequence_model
 from hadamard_note1.matrices import sylvester
 from hadamard_note1.models import (
     SmoothedContextModel,
@@ -55,3 +55,27 @@ def test_matrix_level_evaluation_returns_finite_metrics() -> None:
     assert 0 <= metrics["test_unseen_context_rate"] <= 1
     assert math.isfinite(float(metrics["train_log_loss"]))
     assert math.isfinite(float(metrics["test_log_loss"]))
+
+
+def test_sequence_evaluator_matches_matrix_row_reset() -> None:
+    train = [sylvester(8), sylvester(8)]
+    test = [sylvester(16)]
+    matrix_metrics = evaluate_context_model(
+        train,
+        test,
+        3,
+        reset_at_row_boundary=True,
+    )
+    sequence_metrics = evaluate_sequence_model(
+        np.concatenate(train, axis=0),
+        np.concatenate(test, axis=0),
+        3,
+    )
+
+    for metric in (
+        "train_log_loss",
+        "test_log_loss",
+        "test_accuracy",
+        "test_unseen_context_rate",
+    ):
+        assert sequence_metrics[metric] == pytest.approx(matrix_metrics[metric])

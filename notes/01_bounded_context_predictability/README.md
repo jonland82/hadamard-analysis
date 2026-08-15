@@ -39,11 +39,11 @@ $$
 
 ## Narrative role
 
-This note tests the middle of the project narrative:
+This note tests the first two clauses of the project's now-revised narrative:
 
-> Hadamard matrices are globally choreographed, locally hard to predict, yet may contain weak local information that transfers beyond a single matrix.
+> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
 
-The first note stops before the search claim. Search guidance is justified only if a local signal survives held-out evaluation and structural controls.
+The first note stops before the regional and search claims. Its PDF intentionally preserves the earlier project wording under which it was written; Note 2 records the evidence that motivated the revision above.
 
 ## Planned mathematical statements
 

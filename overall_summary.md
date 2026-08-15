@@ -2,30 +2,30 @@
 
 This document gives the conceptual theory. The operational plan, data requirements, formal statement--experiment pairings, and proposed short-note sequence are in [`research_program.md`](research_program.md). The original handoff remains available under [`context_initial_deprecated/`](context_initial_deprecated/) as historical reference.
 
-**Current status:** the structural Hadamard facts and exact pruning rules are established, but the local-unpredictability theorem is still a target. Note 1 now contains a verified small-order corpus pipeline and a completed 20-repetition robustness study. Canonical representatives show substantial held-out bounded-context signal, but nearly all of it disappears under equivalence-preserving row and column permutations; at the primary comparison, the remaining gain is statistically indistinguishable from the balanced-row control. The search-guidance claim remains untested, and the earlier informal "Markov result" has not been independently reconstructed.
+**Current status:** the structural Hadamard facts, exact pruning rules, and regional correction laws are established. An equivalence-invariant next-entry theorem remains open but is no longer the hinge of the project. Note 1 showed that nearly all strong serialized predictability disappears under equivalence-preserving randomization. Note 2 changed the local object: exact balance and partial-inner-product state significantly predicts next-block composition under randomized equivalent presentations, including early in construction. Its all-pair composite score also strongly ranks observed valid nonterminal blocks above random, balance-only, one-pair, and minimum-pressure policies. Serialized context adds no further randomized-presentation gain. Exact-search benefit remains untested.
 
 ## Core narrative
 
-The canonical one-sentence research hypothesis is:
+The canonical one-sentence research narrative is:
 
-> Hadamard matrices are globally choreographed, locally hard to predict, yet potentially locally informative enough to guide an exact search.
+> Hadamard matrices are globally choreographed, locally elusive entry by entry, yet regionally predictable through their evolving constraint state—structure that may guide an exact search.
 
 The project begins with the underlying tension:
 
-> A Hadamard matrix is completely rigid when viewed as a whole, yet a small local window may reveal very little about the next entry.
+> A Hadamard matrix can be elusive one entry at a time even while its unfinished regions carry exactly calculable correction burdens.
 
-The theory aims to quantify that tension and then ask whether even weak local information can accelerate an exact construction algorithm.
+The theory now resolves the first half of that tension: serialized windows are representation-sensitive, while balance and partial inner products expose representation-resilient regional information. The remaining question is whether that information accelerates exact construction.
 
 ### How the experiments test the sentence
 
 | Narrative clause | Mathematical content | Experiments |
 |---|---|---|
-| **Globally choreographed** | Exact orthogonality, normalization, balance, symmetry, and partial feasibility constrain the full matrix. | Experiment G isolates how much each exact constraint reduces search. |
-| **Locally hard to predict** | Conditional bias should be small and conditional entropy should remain high under a fixed probability model. | Experiments A, C, and D measure bias, entropy, mutual information, and dependence on context length. Experiment E checks whether the conclusion depends on row or column traversal. |
-| **Still locally informative** | The desired regime is weak but nonzero predictive information rather than perfect independence. | Experiment B tests whether the signal improves held-out log loss beyond fair-coin, marginal-only, and balance-only baselines. |
-| **Enough to guide an exact search** | Statistical information may order branches, while only proved impossibility conditions may prune them. | Experiment F measures first-solution search gains. Experiment G separates those gains from exact pruning gains. |
+| **Globally choreographed** | Exact orthogonality, normalization, balance, symmetry, and partial feasibility constrain the full matrix. | Structural lemmas establish this; the later solver ablation isolates each constraint's algorithmic contribution. |
+| **Locally elusive entry by entry** | Short coordinate contexts need not carry invariant next-sign information. | Note 1 and Note 2's representation ablations show that the strong serialized signal follows catalog coordinate order. |
+| **Regionally predictable through constraint state** | Partial row sums and inner products fix remaining sign and agreement inventories, inducing next-block laws. | Note 2 proves the hypergeometric laws and verifies them for $b=2,4,8$ under randomized equivalent presentations. |
+| **Structure that may guide exact search** | A state score may order feasible blocks, while only proved impossibility may prune. | Note 2 establishes offline candidate ranking; the next note measures first-solution nodes and backtracks. |
 
-This mapping is the backbone of the short-note sequence. A negative result at one stage changes the later arc: for example, if Experiment A finds no Hadamard-specific signal beyond balance, the search claim should not be built around that signal.
+This mapping is the backbone of the short-note sequence. The Note 1 representation result redirected the project from serialized adjacency to construction state; the next note must similarly abandon the search claim if offline ranking fails to reduce exact-search work.
 
 ## 1. Exact global structure
 
@@ -307,25 +307,27 @@ Every policy comparison must use the same verifier, constraints, instances, stop
 
 ## 9. The intended endpoint
 
-The strongest theoretical arc would be
+The strongest supported arc is now
 
 $$
-\text{exact global orthogonality}
+\text{exact global balance and orthogonality}
 \;\Longrightarrow\;
-\text{provable limits on local prediction}
+\text{exact regional correction laws}
 \;\Longrightarrow\;
-\text{certified consequences for exact search}.
+\text{held-out candidate-block ranking}
+\;\Longrightarrow\;
+\text{completeness-preserving exact-search guidance}.
 $$
 
-A more modest but still coherent result would be:
+The first three links are established in Notes 1 and 2. The final implication is the next experimental target. A coherent solver result must:
 
-- define local predictability rigorously;
-- measure weak local dependence across Hadamard families;
 - build a complete exact solver;
-- show that the measured dependence improves branch ordering;
-- clearly separate empirical speedups from proved mathematical facts.
+- hold its exact feasibility rules fixed across policies;
+- compare all-pair ordering with random, lexicographic, balance-only, and minimum-pressure baselines;
+- report first-solution nodes and backtracks as primary outcomes;
+- separate empirical performance from the proved completeness guarantee.
 
-The robustness study supports a representation-aware reading of this hypothesis: the global choreography is exact; local prediction is difficult once arbitrary equivalent presentations are admitted; canonical presentations nevertheless contain transferable local information; and whether that information can guide exact search is still open.
+The first two studies support a state-aware reading of this hypothesis: the global choreography is exact; arbitrary serialized windows remain difficult to predict; catalog coordinate order contains additional non-invariant information; but global correction burdens make regional behavior predictably nonrandom even under randomized equivalent presentations. Whether that state-derived regional signal improves exact search is still open.
 
 ## 10. Current claim registry
 
@@ -341,6 +343,7 @@ The robustness study supports a representation-aware reading of this hypothesis:
 
 - The partial-inner-product magnitude and parity tests are sound impossibility conditions.
 - The uniform balanced-sequence formula gives the dependence forced by balance alone.
+- The remaining plus count and every remaining pair-agreement count are fixed by the current partial sums; uniform remaining-coordinate order gives explicit hypergeometric next-block laws.
 - Under a transpose-invariant ensemble and symmetric sampling, row and column population statistics agree.
 - Sound additional pruning constraints produce a nested search tree.
 - Statistical branch ordering preserves completeness when it never deletes an unproved branch.
@@ -352,48 +355,54 @@ The robustness study supports a representation-aware reading of this hypothesis:
 
 ### [CONJECTURE]
 
-- Some representation-robust Hadamard ensembles contain residual local information beyond normalization and balance.
-- For useful regimes of fixed or slowly growing $k$, that information may be small and may decrease with $d$.
-- A held-out local predictor may reduce first-solution search work through branch ordering.
+- Constraint-state regional scores reduce first-solution search work when used for safe candidate ordering.
+- The all-pair regional score reduces first-solution search work through completeness-preserving branch ordering.
 
 ### [EMPIRICAL]
 
 - Across $20$ paired repetitions, the order-$28$, $k=8$ canonical representatives improve log loss over the fair-coin baseline by $0.13935$ nats, with a 95% repetition-bootstrap interval of $[0.13850,0.14014]$.
 - Equivalence-preserving row and column permutations reduce that gain to $0.03047$ nats, while the balanced-row control gains $0.03033$ nats. Their paired difference is $0.00014$ with interval $[-0.00024,0.00052]$.
 - The canonical-minus-permuted contrast is positive throughout $k=2,\ldots,12$ at orders $24$ and $28$. This indicates that most of the canonical signal is representation-specific rather than an invariant of the Hadamard equivalence class. Full conditions and tables are in [`ROBUSTNESS_RESULTS.md`](notes/01_bounded_context_predictability/ROBUSTNESS_RESULTS.md).
+- Note 2 finds the exact predicted pooling invariances: row-reset statistics are unchanged by whole-row permutation and column-reset statistics are unchanged by whole-column permutation, to less than $4\times10^{-17}$ numerical discrepancy over all tested conditions.
+- At $k=8$, disrupting within-row coordinate order reduces catalog gain by $0.13361$ nats/entry at order $24$ and $0.10895$ at order $28$; the column-traversal dual reductions are $0.12617$ and $0.09323$. Strict-interior prediction retains $0.10625$--$0.15113$ nats/entry, so normalization anchors explain only a minority of the catalog gain. Full results are in [`RESULTS.md`](notes/02_representation_ablation/RESULTS.md).
+- For a partial row with $r$ positions remaining, balance fixes its remaining plus count and each partial inner product fixes the remaining agreement count with every completed row. Under randomized remaining-coordinate order, the next-block counts therefore follow explicit hypergeometric laws.
+- In the $20$-repetition regional experiment, this constraint state predicts block summaries under both fixed-anchor and unrestricted randomized presentations for $b=2,4,8$. At unrestricted randomized order $28$, $b=8$, early gains are $0.05724$ nats for row composition and $0.12014$ nats for pressured-pair agreement; middle gains are $0.20139$ and $0.54619$.
+- Serialized context adds no gain beyond constraint state after randomization, while retaining a large catalog-only residual. This separates representation-resilient global-to-regional information from representation-specific adjacency.
+- In ambiguous nonterminal states, the all-pair composite likelihood strongly ranks observed valid blocks under randomized presentations. At order $28$, $b=8$, mean percentile is $0.8481$ early and $0.9316$ middle, compared with $0.5634$ and $0.6270$ for balance alone.
 
 ### [OPEN]
 
 - The exact earlier "Markov result" must be reconstructed from code, data, or notes before it is cited.
 - Generalization beyond the fixed catalog must be tested across construction families, representative-selection rules, and held-out orders.
-- It remains unknown whether any held-out signal reduces exact-search work.
+- The offline all-pair ranking policy must be embedded in a complete solver and tested for first-solution node reduction.
+- It remains unknown whether the demonstrated offline ranking reduces exact-search work.
 
 ## 11. Open mathematical questions
 
-1. What probability space should define the primary theorem?
-2. Should contexts be row-wise, column-wise, flattened, or compared across all of these?
-3. How strongly do the statistics depend on equivalence-class weighting and representative selection?
-4. For fixed $k$, does residual local bias decrease as $d$ grows?
-5. Are Sylvester/Walsh matrices atypically predictable relative to other families or equivalence classes?
-6. Can orthogonality imply a nontrivial upper bound on local mutual information beyond the balance baseline?
-7. Can the earlier Markov observation be reconstructed and proved analytically?
-8. Can local information ever support a new sound pruning theorem, rather than branch ordering alone?
+1. Does the all-pair score reduce first-solution nodes and backtracks in a complete solver?
+2. How should pairwise marginal scores be combined or calibrated when their constraints are dependent?
+3. Does the regional result generalize to held-out construction families and larger orders?
+4. Which block size and row/column selection policy best balances guidance against branching cost?
+5. Can one derive a tractable joint regional law stronger than the composite likelihood?
+6. How does symmetry breaking interact with the state score during partial construction?
+7. Can state information support a new sound pruning theorem, rather than branch ordering alone?
+8. What asymptotic regional-information law follows as $d$ grows with fixed or slowly growing $b$?
 
 ## 12. Publication paths
 
 The short notes support two coherent fallback papers:
 
-- **Global Rigidity and Local Predictability:** probability model, balance baseline, local bias, log loss, mutual information, context scaling, and transpose symmetry.
+- **Global Rigidity and Regional Prediction:** representation diagnosis, correction-state laws, regional log loss, and candidate ranking.
 - **Constraint-Guided Hadamard Search:** normalized enumeration, exact partial pruning, completeness-preserving branch ordering, benchmarks, and ablations.
 
 The strongest integrated paper would connect the two:
 
 $$
-\text{global orthogonality}
+\text{global balance and orthogonality}
 \Longrightarrow
-\text{a proved restriction on local distributions}
+\text{proved regional correction distributions}
 \Longrightarrow
-\text{a certified search consequence}.
+\text{complete search with empirically improved branch ordering}.
 $$
 
-If that implication cannot be proved, the empirical local-statistics paper and the complete-search paper should remain separate and state their evidence at the correct level.
+If the final performance implication fails, the regional-prediction paper remains complete and the exact-search paper should report the negative benchmark at the correct level.
